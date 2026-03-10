@@ -1,7 +1,7 @@
 @extends('admin.adminMasterPage')
 @section('content')
   <style>
-  
+
     .get-free-text{
         /* width: 80%; */
         /* border: 3px solid black; */
@@ -96,244 +96,234 @@
     </nav>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="nav nav-tabs " id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                            data-bs-target="#home" type="button" role="tab"
-                            aria-controls="home" aria-selected="true">
-                        <i class="fas fa-home"></i> Percentage Discount
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                            data-bs-target="#profile" type="button" role="tab"
-                            aria-controls="profile" aria-selected="false">
-                        <i class="fas fa-user"></i> Free Item Discount
-                    </button>
-                </li>
 
-            </ul>
+<div class="card">
+    <div class="card-body">
+      <!-- Bordered Tabs -->
+      <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-percentage" type="button" role="tab" aria-controls="home" aria-selected="true">Percentage Discount</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-free" type="button" role="tab" aria-controls="profile" aria-selected="false">Free Item Discount</button>
+        </li>
 
-            <!-- Tab Content -->
-            <div class="tab-content p-3 border card border-top-0" id="myTabContent">
-
-                {{-- Discount by Percentage (%) --}}
-                <div class="tab-pane fade show active" id="home" role="tabpanel"
-                     aria-labelledby="home-tab">
-
-                    <form action="" method="post" enctype="multipart/form-data">
-                        @csrf
+      </ul>
+      <div class="tab-content pt-2" id="borderedTabContent">
+        <div class="tab-pane fade show active" id="bordered-percentage" role="tabpanel" aria-labelledby="home-tab">
+            <form action="" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                    <div class="col-12">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-lg-4 col-12 mb-3">
-                                        <label><b>Food Image:</b></label>
-                                        <center>
-                                            <div class="box">
-                                               <div id="drop-zone">
-                                                   <div class="icon"><i class="bi bi-image"></i></div>
-                                                   <div>Drag & drop an image here</div>
-                                               </div>
 
-                                               <!-- Select Button -->
-                                               <button type="button" id="select-btn">Select Image</button>
-                                               <input type="file" id="file-input" accept="image/*" hidden />
-
-                                               <!-- Preview -->
-                                               <div id="preview">
-                                                   <img id="preview-img" alt="Preview" />
-                                                   <div id="file-name"></div>
-                                                   <div class="actions">
-                                                   <button type="button" id="btn-change"><i class="bi bi-arrow-repeat"></i> Change</button>
-                                                   <button type="button" id="btn-remove"><i class="bi bi-trash"></i> Remove</button>
-                                                   </div>
-                                               </div>
+                            <div class="col-lg-4 col-12 mb-3">
+                                <label><b>Food Image:</b></label>
+                                <center>
+                                    <div class="box">
+                                       <div id="drop-zone">
+                                           <div class="icon"><i class="bi bi-image"></i></div>
+                                           <div>Drag & drop an image here</div>
+                                       </div>
+                                       <!-- Select Button -->
+                                       <button type="button" id="select-btn">Select Image</button>
+                                       <input type="file" id="file-input" accept="image/*" hidden />
+                                       <!-- Preview -->
+                                       <div id="preview">
+                                           <img id="preview-img" alt="Preview" />
+                                           <div id="file-name"></div>
+                                           <div class="actions">
+                                           <button type="button" id="btn-change"><i class="bi bi-arrow-repeat"></i> Change</button>
+                                           <button type="button" id="btn-remove"><i class="bi bi-trash"></i> Remove</button>
                                            </div>
-                                        </center>
-                                    </div>
-                                    <div class="col-lg-8 col-12 ">
-                                        <div class="row">
-                                            <div class="col-12 mb-3">
-                                                <label for="shop1"><b>Shop:</b></label>
-                                                <select name="shop" class="form-select border-2 border-dark select2" id="shop1">
-                                                    <option value="Rice Express">Rice Express</option>
-                                                    <option value="Tube Cafe">Tube Cafe</option>
-                                                </select>
-                                            </div>
+                                       </div>
+                                   </div>
+                                </center>
+                            </div>
 
-                                            <div class="col-6 mb-3">
-                                                <label><b>Item Name:</b></label>
-                                                <input type="text" class="form-control border-2 border-dark">
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label><b>Original Price ($):</b></label>
-                                                <input type="number" placeholder="0.00" class="form-control border-2 border-dark">
-                                            </div>
+                            <div class="col-lg-8 col-12 ">
+                                <div class="row">
 
-                                            <div class="col-6 mb-3">
-                                                <label><b>Discount (%):</b></label>
-                                                <input type="number" class="form-control border-2 border-dark">
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label><b>Quantity:</b></label>
-                                                <input type="number" class="form-control border-2 border-dark">
-                                            </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="shop1"><b>Shop:</b></label>
+                                        <select name="shop" class="form-select border-2 border-dark select2" id="shop1">
+                                            <option value="Rice Express">Rice Express</option>
+                                            <option value="Tube Cafe">Tube Cafe</option>
+                                        </select>
+                                    </div>
 
-                                            <div class="col-6 mb-3">
-                                                <label for="from_date1"><b>Start Date:</b></label>
-                                                <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date1">
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label for="to_date1"><b>End Date:</b></label>
-                                                <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date1">
-                                            </div>
-                                        </div>
+                                    <div class="col-6 mb-3">
+                                        <label><b>Item Name:</b></label>
+                                        <input type="text" class="form-control border-2 border-dark">
                                     </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100">Submit the Post</button>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Original Price ($):</b></label>
+                                        <input type="number" placeholder="0.00" class="form-control border-2 border-dark">
                                     </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Discount (%):</b></label>
+                                        <input type="number" class="form-control border-2 border-dark">
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Quantity:</b></label>
+                                        <input type="number" class="form-control border-2 border-dark">
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label for="from_date1"><b>Start Date:</b></label>
+                                        <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date1">
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label for="to_date1"><b>End Date:</b></label>
+                                        <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date1">
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-
-
-                    </form>
-
-                </div>
-
-                {{-- Discount by Free item --}}
-                <div class="tab-pane fade" id="profile" role="tabpanel"
-                     aria-labelledby="profile-tab">
-
-                    <form action="" method="post" enctype="multipart/form-data">
-                        @csrf
-                       <div class="row">
                             <div class="col-12">
-                                <div class="row">
-                                    <div class="col-lg-4 col-12 mb-3">
-                                        <label><b>Food Image:</b></label>
-                                        <center>
-                                            <div class="box">
-                                               <div id="drop-zone1">
-                                                   <div class="icon"><i class="bi bi-image"></i></div>
-                                                   <div>Drag & drop an image here</div>
-                                               </div>
-
-                                               <!-- Select Button -->
-                                               <button type="button" id="select-btn1">Select Image</button>
-                                               <input type="file" id="file-input1" accept="image/*" hidden />
-
-                                               <!-- Preview -->
-                                               <div id="preview1">
-                                                   <img id="preview-img1" alt="Preview" />
-                                                   <div id="file-name1"></div>
-                                                   <div class="actions">
-                                                   <button type="button" id="btn-change1"><i class="bi bi-arrow-repeat"></i> Change</button>
-                                                   <button type="button" id="btn-remove1"><i class="bi bi-trash"></i> Remove</button>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                        </center>
-                                    </div>
-                                    <div class="col-lg-8 col-12 ">
-                                        <div class="row">
-                                            <div class="col-12 mb-3">
-                                                <label ><b>Shop:</b></label>
-                                                <select name="shop" class="form-select border-2 border-dark select2" >
-                                                    <option value="Rice Express">Rice Express</option>
-                                                    <option value="Tube Cafe">Tube Cafe</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-6 mb-3">
-                                                <label><b>Item Name:</b></label>
-                                                <input type="text" class="form-control border-2 border-dark">
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label><b>Price ($):</b></label>
-                                                <input type="number" placeholder="0.00" class="form-control border-2 border-dark">
-                                            </div>
-
-                                            <div class="col-6 mb-3">
-                                                <label><b>Quantity:</b></label>
-                                                <input type="number" class="form-control border-2 border-dark">
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    {{-- Get Free session --}}
-
-                                    {{-- <hr style="width: 80%;height:3px;color:black;margin:0 auto;background-color:black"> --}}
-                                    <div class="col-12">
-                                        <div class="get-free-text">
-                                            <h3 class="text-center"><b>Gets Free</b></h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-12 mb-3">
-                                        <label><b>Food Image:</b></label>
-                                        <center>
-                                            <div class="box">
-                                               <div id="drop-zone2">
-                                                   <div class="icon"><i class="bi bi-image"></i></div>
-                                                   <div>Drag & drop an image here</div>
-                                               </div>
-
-                                               <!-- Select Button -->
-                                               <button type="button" id="select-btn2">Select Image</button>
-                                               <input type="file" id="file-input2" accept="image/*" hidden />
-
-                                               <!-- Preview -->
-                                               <div id="preview2">
-                                                   <img id="preview-img2" alt="Preview" />
-                                                   <div id="file-name2"></div>
-                                                   <div class="actions">
-                                                   <button type="button" id="btn-change2"><i class="bi bi-arrow-repeat"></i> Change</button>
-                                                   <button type="button" id="btn-remove2"><i class="bi bi-trash"></i> Remove</button>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                        </center>
-                                    </div>
-                                    <div class="col-lg-8 col-12 ">
-                                        <div class="row">
-                                            <div class="col-6 mb-3">
-                                                <label><b>Free Item Name:</b></label>
-                                                <input type="text" class="form-control border-2 border-dark">
-                                            </div>
-
-                                            <div class="col-6 mb-3">
-                                                <label><b>Free Quantity:</b></label>
-                                                <input type="number" class="form-control border-2 border-dark">
-                                            </div>
-
-                                            <div class="col-6 mb-3">
-                                                <label for="from_date2"><b>Start Date:</b></label>
-                                                <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date2">
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label for="to_date2"><b>End Date:</b></label>
-                                                <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date2">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100">Submit the Post</button>
-                                    </div>
-                                </div>
+                                <button class="btn btn-primary w-100">Submit the Post</button>
                             </div>
                         </div>
-                     </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
+        <div class="tab-pane fade" id="bordered-free" role="tabpanel" aria-labelledby="profile-tab">
+
+            <form action="" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-12 mb-3">
+                                <label><b>Food Image:</b></label>
+                                <center>
+                                    <div class="box">
+                                       <div id="drop-zone1">
+                                           <div class="icon"><i class="bi bi-image"></i></div>
+                                           <div>Drag & drop an image here</div>
+                                       </div>
+
+                                        <!-- Select Button -->
+                                        <button type="button" id="select-btn1">Select Image</button>
+                                        <input type="file" id="file-input1" accept="image/*" hidden />
+
+                                        <!-- Preview -->
+                                        <div id="preview1">
+                                            <img id="preview-img1" alt="Preview" />
+                                            <div id="file-name1"></div>
+                                            <div class="actions">
+                                            <button type="button" id="btn-change1"><i class="bi bi-arrow-repeat"></i> Change</button>
+                                            <button type="button" id="btn-remove1"><i class="bi bi-trash"></i> Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-lg-8 col-12 ">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label ><b>Shop:</b></label>
+                                        <select name="shop" class="form-select border-2 border-dark select2" >
+                                            <option value="Rice Express">Rice Express</option>
+                                            <option value="Tube Cafe">Tube Cafe</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Item Name:</b></label>
+                                        <input type="text" class="form-control border-2 border-dark">
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Price ($):</b></label>
+                                        <input type="number" placeholder="0.00" class="form-control border-2 border-dark">
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Quantity:</b></label>
+                                        <input type="number" class="form-control border-2 border-dark">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        {{-- Get Free session --}}
+
+                            {{-- <hr style="width: 80%;height:3px;color:black;margin:0 auto;background-color:black"> --}}
+                            <div class="col-12">
+                                <div class="get-free-text">
+                                    <h3 class="text-center"><b>Gets Free</b></h3>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-12 mb-3">
+                                <label><b>Food Image:</b></label>
+                                <center>
+                                    <div class="box">
+                                       <div id="drop-zone2">
+                                           <div class="icon"><i class="bi bi-image"></i></div>
+                                           <div>Drag & drop an image here</div>
+                                       </div>
+
+                                       <!-- Select Button -->
+                                       <button type="button" id="select-btn2">Select Image</button>
+                                       <input type="file" id="file-input2" accept="image/*" hidden />
+
+                                       <!-- Preview -->
+                                       <div id="preview2">
+                                           <img id="preview-img2" alt="Preview" />
+                                           <div id="file-name2"></div>
+                                           <div class="actions">
+                                           <button type="button" id="btn-change2"><i class="bi bi-arrow-repeat"></i> Change</button>
+                                           <button type="button" id="btn-remove2"><i class="bi bi-trash"></i> Remove</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                                </center>
+                                </div>
+                                <div class="col-lg-8 col-12 ">
+                                    <div class="row">
+                                        <div class="col-6 mb-3">
+                                            <label><b>Free Item Name:</b></label>
+                                            <input type="text" class="form-control border-2 border-dark">
+                                        </div>
+
+                                        <div class="col-6 mb-3">
+                                            <label><b>Free Quantity:</b></label>
+                                            <input type="number" class="form-control border-2 border-dark">
+                                        </div>
+
+                                        <div class="col-6 mb-3">
+                                            <label for="from_date2"><b>Start Date:</b></label>
+                                            <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date2">
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label for="to_date2"><b>End Date:</b></label>
+                                            <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100">Submit the Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+        </div>
+      </div><!-- End Bordered Tabs -->
     </div>
 </div>
- {{-- <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script> --}}
+
+
+{{-- Use for control date (From date can not bigger than To date) --}}
 <script>
     document.getElementById('from_date1').addEventListener('change', function() {
         let fromDate = this.value;
@@ -372,6 +362,8 @@
 
 </script>
 
+
+{{-- Use with Image Picker --}}
 @for ($i = 0; $i < 3; $i++)
     @php
         $suffix = $i == 0 ? '' : $i;

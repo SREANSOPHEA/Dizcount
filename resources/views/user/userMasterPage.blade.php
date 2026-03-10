@@ -127,7 +127,6 @@
       </div>
       <div class="footer-info">
         <p>
-          &copy; <span id="displayYear"></span> Developed By<a href="https://t.me/SREANOusophea" target="_blank"> SREAN Ousophea</a><br><br>
           &copy; <span id="displayYear"></span> Distributed By CodeTech Solution
 
         </p>
