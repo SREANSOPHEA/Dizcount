@@ -14,10 +14,12 @@
     <div class="row">
         <div class="col-12 text-end ">
             <label class="form-label" for="filter-shop">Filter by shop</label>
-            <select name="filter-by-shop">
-                <option value="all-shop">All Shop</option>
-                <option value="Rice express">Rice Express</option>
-                <option value="Heekcaa">Heekcaa</option>
+            <select name="filter-by-shop" id="filterShop">
+                <option value="all">All Shop</option>
+                <option value="Pizza Shop">Pizza Shop</option>
+                <option value="Burger Shop">Burger Shop</option>
+                <option value="Food Shop">Food Shop</option>
+                <option value="Pasta Shop">Pasta Shop</option>
             </select>
         </div>
         <div class="col-12 text-end">
@@ -28,7 +30,7 @@
         </div>
         <div class="col-6 mb-3"></div>
         <div class="col-6 mb-3">
-            <input type="text" class="form-control  border-dark" placeholder="Search.....">
+            <input type="text" class="form-control  border-dark" placeholder="Search by Food.....">
         </div>
     </div>
 
@@ -50,7 +52,7 @@
             <tbody>
 
                 @foreach ($datas as $data)
-                <tr class="align-middle">
+                <tr class="align-middle postData" data-shop="{{$data[1]}}"  data-food="{{$data[2]}}">
                     <td>{{$data[0]}}</td>
                     <td>{{$data[1]}}</td>
                     <td>Fried Rice</td>
@@ -99,6 +101,29 @@
             document.getElementById('to_date').min = fromDate;
         }
     };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+        $("#filterShop").change(function(){
+            var shopValue = $("#filterShop").val();
+
+            // First hide all rows
+            $('.postData').hide();
+
+            if (shopValue != 'all'){
+                // Show rows where data-shop matches the selected value
+                $('.postData').each(function() {
+                    if ($(this).data('shop') == shopValue) {
+                        $(this).show();
+                    }
+                });
+            } else {
+                // Show all rows
+                $('.postData').show();
+            }
+        });
+    });
 </script>
 
 @endsection
