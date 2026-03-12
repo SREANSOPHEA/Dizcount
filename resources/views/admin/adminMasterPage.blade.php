@@ -52,26 +52,6 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                  <i class="bi bi-person"></i>
-                  <span>My Profile</span>
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li>
                 <a class="dropdown-item d-flex align-items-center" href="/admin/signout">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
@@ -137,11 +117,30 @@
           </ul>
         </li>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link {{request()->is('admin/category*')?'':'collapsed'}}" href="/admin/category">
             <i class="bi bi-grid"></i>
             <span>Category</span>
           </a>
+        </li> --}}
+
+        <li class="nav-item">
+          <a class="nav-link {{request()->is('*Admin')?'':'collapsed'}}" data-bs-target="#admin-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-menu-button-wide"></i><span>Admin</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="admin-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="/admin/viewAdmin">
+                <i class="bi bi-circle"></i><span>View Admins</span>
+              </a>
+            </li>
+            <li>
+              <a href="/admin/addAdmin">
+                <i class="bi bi-circle"></i><span>Add Admin</span>
+              </a>
+            </li>
+
+          </ul>
         </li>
 
       </ul>

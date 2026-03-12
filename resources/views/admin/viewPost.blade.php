@@ -30,7 +30,7 @@
         </div>
         <div class="col-6 mb-3"></div>
         <div class="col-6 mb-3">
-            <input type="text" class="form-control  border-dark" placeholder="Search by Food.....">
+            <input type="text" id="searchFoodName" class="form-control  border-dark" placeholder="Search by Food.....">
         </div>
     </div>
 
@@ -52,10 +52,10 @@
             <tbody>
 
                 @foreach ($datas as $data)
-                <tr class="align-middle postData" data-shop="{{$data[1]}}"  data-food="{{$data[2]}}">
+                <tr class="align-middle postData" data-shop="{{$data[1]}}"  data-food="{{$data[2]}}" data-start="{{$data[6]}}" data-end="{{$data[7]}}">
                     <td>{{$data[0]}}</td>
                     <td>{{$data[1]}}</td>
-                    <td>Fried Rice</td>
+                    <td>{{$data[2]}}</td>
                     <td><img src="{{asset("assets/img/$data[3]")}}" class="rounded" style="height: 75px" alt="food image"></td>
                     <td>$ {{$data[4]}}</td>
                     <td>{{$data[5]}}</td>
@@ -122,6 +122,43 @@
                 // Show all rows
                 $('.postData').show();
             }
+        });
+
+
+        $("#searchFoodName").on("keyup", function () {
+
+            var search = $(this).val().toLowerCase().trim();
+
+            $(".postData").each(function () {
+                var food = $(this).data("food").toLowerCase();
+
+                if (food.includes(search)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+
+        });
+
+        $("#from_date, #to_date").on("change", function () {
+
+            var from = $("#from_date").val();
+            var to = $("#to_date").val();
+
+            $(".postData").each(function () {
+
+                var start = $(this).data("start");
+                var end = $(this).data("end");
+
+                if (start >= from && end <= to) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+
+            });
+
         });
     });
 </script>

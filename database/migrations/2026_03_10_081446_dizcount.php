@@ -17,17 +17,12 @@ return new class extends Migration
             $table->string('username', 50)->unique();
             $table->string('email', 100);
             $table->text('password');
+            $table->string('phone', 20);
+            $table->string('telegram', 100);
             $table->enum('role', ['admin', 'seller', 'customer', 'guest']);
             $table->timestamps();
         });
 
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('phone', 20)->unique();
-            $table->string('telegram', 100)->nullable();
-            $table->timestamps();
-        });
 
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
@@ -87,8 +82,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('users');;
         Schema::dropIfExists('shops');
         Schema::dropIfExists('social_media');
         Schema::dropIfExists('posts');

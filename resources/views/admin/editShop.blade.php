@@ -79,11 +79,11 @@
     }
   </style>
 <div class="pagetitle">
-    <h1>Register New Shop</h1>
+    <h1>Edit This Shop</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/admin/uploadPost">Shop</a></li>
-        <li class="breadcrumb-item active">Add New Shop</li>
+        <li class="breadcrumb-item"><a href="/admin/viewShop">Shop</a></li>
+        <li class="breadcrumb-item active">Edit this Shop</li>
       </ol>
     </nav>
 </div>
@@ -94,26 +94,27 @@
     </div>
 
 
-    <form action="/admin/addShop-submit" method="post" enctype="multipart/form-data">
+    <form action="/admin/editShop-submit/{{$data['id']}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-12">
                 <div class="row">
                     <div class="col-lg-4 col-12 mb-3">
-                        <label><b>Food Image:</b></label>
+                        <label><b>Shop Logo:</b></label>
                         <center>
                             <div class="box">
-                               <div id="drop-zone">
+                               <div id="drop-zone" style="display: none">
                                    <div class="icon"><i class="bi bi-image"></i></div>
                                    <div>Drag & drop an image here</div>
                                </div>
                                <!-- Select Button -->
-                               <button type="button" id="select-btn">Select Image</button>
+                               <button type="button" style="display: none" id="select-btn">Select Image</button>
                                <input type="file" name="image" id="file-input" accept="image/*" hidden />
                                <!-- Preview -->
-                               <div id="preview">
-                                   <img id="preview-img" alt="Preview" />
-                                   <div id="file-name"></div>
+                               <div id="preview" style="display: block">
+                                    <input type="hidden" value="{{$data['logo_url']}}" name="old_image">
+                                   <img id="preview-img" src="{{asset('assets/img/'.$data['logo_url'])}}"  alt="Preview" />
+                                   <div id="file-name">{{$data['logo_url']}}</div>
                                    <div class="actions">
                                    <button type="button" id="btn-change"><i class="bi bi-arrow-repeat"></i> Change</button>
                                    <button type="button" id="btn-remove"><i class="bi bi-trash"></i> Remove</button>
@@ -126,7 +127,7 @@
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <label ><b>Shop Name:</b></label>
-                                <input type="text" name="name" placeholder="Shop Name" class="form-control border-2 border-dark" autocomplete="off" required>
+                                <input type="text" name="name" value="{{$data['name']}}" placeholder="Shop Name" class="form-control border-2 border-dark" autocomplete="off" required>
                             </div>
                             {{-- <div class="col-6 mb-3">
                                 <label><b>Shop Cateogry:</b></label>
@@ -138,15 +139,15 @@
                             </div> --}}
                             <div class="col-6 mb-3">
                                 <label><b>Location:</b></label>
-                                <input type="text" name="location" placeholder="Location" class="form-control border-2 border-dark" autocomplete="off" required>
+                                <input type="text" name="location" value="{{$data['location']}}" placeholder="Location" class="form-control border-2 border-dark" autocomplete="off" required>
                             </div>
                             <div class="col-6 mb-3">
                                 <label><b>Phone Number:</b></label>
-                                <input type="text" name="phone" placeholder="E.g. 0123456789" class="form-control border-2 border-dark" autocomplete="off" required>
+                                <input type="text" name="phone" value="{{$data['phone']}}" placeholder="E.g. 0123456789" class="form-control border-2 border-dark" autocomplete="off" required>
                             </div>
                             <div class="col-6 mb-3">
                                 <label><b>Telegram:</b></label>
-                                <input type="text" name="telegram" placeholder="E.g. https://t.me/name" class="form-control border-2 border-dark" autocomplete="off" required>
+                                <input type="text" name="telegram" value="{{$data['telegram']}}" placeholder="E.g. https://t.me/name" class="form-control border-2 border-dark" autocomplete="off" required>
                             </div>
 
                         </div>
