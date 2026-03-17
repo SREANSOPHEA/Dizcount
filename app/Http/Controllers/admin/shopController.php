@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\shops;
+use App\Models\social_media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -13,16 +14,18 @@ class shopController extends Controller
 {
     function viewShop(){
         $items = shops::all();
-        return view("admin.viewShop",['items'=>$items]);
+        return view("admin.shops.viewShop",['items'=>$items]);
     }
 
     function viewShopDetail($id){
         $shop = shops::find($id);
-        return view("admin.viewShopDetail",['data'=>$shop]);
+        $media = social_media::where('shop_id',$id)->get();
+
+        return view("admin.shops.viewShopDetail",['data'=>$shop,'media'=>$media]);
     }
 
     function addShop(){
-        return view("admin.addShop");
+        return view("admin.shops.addShop");
     }
 
     function addShopSubmit(Request $request){
@@ -32,10 +35,11 @@ class shopController extends Controller
         }else{
             $image = $this->uploadImage($file);
         }
-
+        $coordinate = $request->location;
+        $location = str_replace(" ",'',$coordinate);
         shops::create([
             'name'     => $request->name,
-            'location' => $request->location,
+            'location' => $location,
             'logo_url' => $image,
             'telegram' => $request->telegram,
             'phone'    => $request->phone,
@@ -46,7 +50,7 @@ class shopController extends Controller
 
     function editShop($id){
         $data = shops::find($id);
-        return view('admin.editShop',['data'=>$data]);
+        return view('admin.shops.editShop',['data'=>$data]);
     }
 
     function editShopSubmit(Request $request,$id){
@@ -58,13 +62,32 @@ class shopController extends Controller
 
         $file = $request->file('image');
         if (empty($file)){
-            $image = $request->old_image;
+            $delete = $request->isDelete;
+            if ($delete == "on"){
+                $image = "img-icon.png";
+            }else{
+                $image = $request->old_image;
+            }
         }else{
             $image = $this->uploadImage($file);
         }
 
         $shop->logo_url = $image;
         $shop->save();
+        return redirect('admin/viewShop');
+    }
+
+    function deleteShop(Request $id){
+        shops::find($id)->delete();
+        return redirect('admin/viewShop');
+    }
+
+    function addShopSocial(Request $request){
+        social_media::create([
+            'shop_id' => $request->id,
+            'platform'=> $request->platform,
+            'url'     => $request->link
+        ]);
         return redirect('admin/viewShop');
     }
 }

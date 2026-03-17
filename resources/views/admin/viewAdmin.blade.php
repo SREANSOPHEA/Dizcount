@@ -51,25 +51,7 @@
                         </td>
                     </tr>
                 @endforeach
-                {{-- @for ($i = 0; $i < 5; $i++)
-                <tr class="align-middle">
-                    <td>{{$i+1}}</td>
-                    <td>Admin</td>
-                    <td>Admin@gamil.com</td>
-                    <td>123</td>
-                    <td><a href="tel:0123456789">0123456789</a></td>
-                    <td><a href="https://t.me/admin" target="_blank">https://t.me/admin</a></td>
-                    <td>
-                        <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li><a class="dropdown-item" href="/admin/editAdmin/{{$i}}"><i class="bi bi-pencil-square"></i> Edit</a></li>
-                            <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="deleteAdmin({{$i}})"><i class="bi bi-trash"></i> Delete</button></li>
-                        </ul>
-                    </div>
-                    </td>
-                </tr>
-                @endfor --}}
+            
             </tbody>
         </table>
     </div>

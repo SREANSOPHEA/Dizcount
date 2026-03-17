@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\posts;
 use App\Models\shops;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class adminController extends Controller
 {
@@ -16,7 +21,10 @@ class adminController extends Controller
     }
 
     function logout(){
-        Session::forget('userID');
+        // Auth::guard('web')->logout();
+        Auth::guard('api')->logout();
+        // Session::forget('userID');
+        Session::flush();
         return redirect('/admin/login');
     }
 
@@ -24,24 +32,40 @@ class adminController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $check = users::where([
-            'username' => $username,
-            'password' => $password
-        ])->first();
+        $user = users::where('username', $username)->first();
 
-        if(empty($check)) return back()->with('error',' ');
+        // Check if user exists AND password matches
+        if ($user && Hash::check($password, $user->password)) {
+            Auth::guard('api')->login($user);
+            // Auth::guard('web')->login($user);
+            $token = JWTAuth::fromUser($user);
+            Session::put('userID', $user->id);
+            Session::put('jwt_token', $token);
+            Session::put('user_role', $user->role);
 
-        Session::put('userID',$check['id']);
-        return redirect('admin/');
+            return redirect('/admin')->with('success', 'Welcome back!');
+        }
 
+        // If login fails
+        return back()->with('error', 'Invalid username or password');
 
     }
 
     function dashboard(){
+        return Auth::guard('api')->user();
+        $now = Carbon::now();
         $totalShop = shops::all()->count();
         $totalAdmin = users::where('role','admin')->count();
+        $totalPost = posts::all()->count();
+        $pendingPost = posts::where('start_date', '>', $now)->count();
+        $activePost = posts::where('start_date', '<=', $now)
+                        ->where('end_date', '>=', $now)
+                        ->count();
+        $expirePost = posts::where('end_date', '<', $now)->count();
 
-        return view("admin.dashboard");
+        $recentPost = posts::with(['shop','admin'])->latest()->take(3)->get();
+
+        return view("admin.dashboard",['shop'=>$totalShop,'post'=>$totalPost,'admin'=>$totalAdmin,'active'=>$activePost,'expire'=>$expirePost,'pending'=>$pendingPost,'recentPost'=>$recentPost]);
     }
 
     function viewAdmin(){
@@ -56,20 +80,17 @@ class adminController extends Controller
     }
 
     function addAdminSubmit(Request $request){
-        $name = $request->name;
-        $email = $request->email;
-        $phone = $request->phone;
-        $telegram = $request->telegram;
-        $password = $request->password;
-        users::create([
-            'username'=>$name,
-            'email'   =>$email,
-            'phone'   =>$phone,
-            'telegram'=>$telegram,
-            'password'=>$password,
+        $user = users::create([
+            'username'=>$request->name,
+            'email'   =>$request->email,
+            'phone'   =>$request->phone,
+            'telegram'=>$request->telegram,
+            'password'=>Hash::make($request->password),
             'role'    =>"admin"
         ]);
-        return redirect('/admin/viewAdmin');
+
+        Auth::login($user);
+        return redirect('/admin/viewAdmin')->with('success', 'Admin created successfully!');
     }
 
     function deleteAdmin(Request $request){

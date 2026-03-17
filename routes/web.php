@@ -32,40 +32,41 @@ Route::get("/contact",[userController::class,'contact']);
 Route::get("/viewPost/{id}",[userController::class,'viewPost']);
 
 
-
-
-// Admin
-Route::get("/admin",[adminController::class,"dashboard"])->name('dashboard');
 Route::get("/admin/login",[adminController::class,"login"])->name('login');
-Route::get("/admin/signout",[adminController::class,"logout"])->name('logout');
 Route::post("/admin/login-submit",[adminController::class,"loginSubmit"])->name('loginSubmit');
-Route::get("/admin/viewAdmin",[adminController::class,"viewAdmin"]);
 
-// Create new Admin
-Route::get("/admin/addAdmin",[adminController::class,"addAdmin"]);
-Route::post("/admin/addAdmin-submit",[adminController::class,"addAdminSubmit"]);
+Route::middleware(['auth:api'])->group(function(){
+// Route::middleware(['auth:api'])->group(function(){
+    // Admin
+    Route::get("/admin",[adminController::class,"dashboard"])->name('dashboard');
+    Route::get("/admin/signout",[adminController::class,"logout"])->name('logout');
+    Route::get("/admin/viewAdmin",[adminController::class,"viewAdmin"]);
 
-// Delete Admin
-Route::post("/admin/deleteAdmin",[adminController::class,"deleteAdmin"]);
-
-// Update Admin
-Route::post("/admin/editAdmin-submit/{id}",[adminController::class,"editAdminSubmit"]);
-Route::get("/admin/editAdmin/{id}",[adminController::class,"editAdmin"]);
-
-// Post Discount
-Route::get("/admin/viewPost",[postController::class,"viewPost"]);
-Route::get("/admin/uploadPost",[postController::class,"uploadPost"]);
-
-// Shop Controller
-Route::get("/admin/viewShop",[shopController::class,"viewShop"]);
-Route::get("/admin/viewShop/{id}",[shopController::class,"viewShopDetail"]);
-
-// Create new Shop
-Route::get("/admin/addShop",[shopController::class,"addShop"]);
-Route::post("/admin/addShop-submit",[shopController::class,"addShopSubmit"]);
-Route::get("/admin/editShop/{id}",[shopController::class,"editShop"]);
-Route::post("/admin/editShop-submit/{id}",[shopController::class,"editShopSubmit"]);
+    Route::middleware(['role:superAdmin'])->group(function(){
+        Route::get("/admin/addAdmin",[adminController::class,"addAdmin"]);
+        Route::post("/admin/addAdmin-submit",[adminController::class,"addAdminSubmit"]);
+        Route::post("/admin/deleteAdmin",[adminController::class,"deleteAdmin"]);
+        Route::post("/admin/editAdmin-submit/{id}",[adminController::class,"editAdminSubmit"]);
+        Route::get("/admin/editAdmin/{id}",[adminController::class,"editAdmin"]);
+    });
 
 
-// Category
-Route::get("/admin/category",[categoryController::class,"category"]);
+    Route::get("/admin/viewPost",[postController::class,"viewPost"]);
+    Route::get("/admin/view/PercentageDiscount/{id}",[postController::class,'viewPercentageDiscount']);
+    Route::get("/admin/view/FreeItemDiscount/{id}",[postController::class,'viewFreeDiscount']);
+    Route::get("/admin/upload/Post",[postController::class,"uploadPost"]);
+    Route::post("/admin/upload/discountPercentage",[postController::class,"uploadPostDiscount"]);
+    Route::post("/admin/upload/discountfree",[postController::class,"uploadPostFree"]);
+    Route::get("/admin/Edit/discountPost/{id}",[postController::class,"editDiscountPost"]);
+    Route::post("/admin/edit/discountPost/percentage/{id}",[postController::class,"editDiscountPercentagePost"]);
+    Route::post("/admin/edit/discountPost/free/{id}",[postController::class,"editDiscountFreePost"]);
+
+    Route::get("/admin/viewShop",[shopController::class,"viewShop"]);
+    Route::get("/admin/viewShop/{id}",[shopController::class,"viewShopDetail"]);
+    Route::get("/admin/addShop",[shopController::class,"addShop"]);
+    Route::post("/admin/addShop-submit",[shopController::class,"addShopSubmit"]);
+    Route::get("/admin/editShop/{id}",[shopController::class,"editShop"]);
+    Route::post("/admin/editShop-submit/{id}",[shopController::class,"editShopSubmit"]);
+    Route::post("/admin/deleteShop",[shopController::class,"deleteShop"]);
+    Route::post("/admin/addShopSocial",[shopController::class,"addShopSocial"]);
+});

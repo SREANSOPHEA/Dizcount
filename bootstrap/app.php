@@ -19,6 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // OR if you want it as an alias to use on specific routes
         $middleware->alias([
             'localize' => Localization::class,
+            'auth' => \App\Http\Middleware\Authenticate::class,
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

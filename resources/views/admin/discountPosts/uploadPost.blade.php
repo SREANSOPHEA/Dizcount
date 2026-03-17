@@ -90,7 +90,7 @@
     <h1>Upload Post</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/admin/uploadPost">Post</a></li>
+        <li class="breadcrumb-item"><a href="/admin/uploadPost/">Post</a></li>
         <li class="breadcrumb-item active">Upload Post</li>
       </ol>
     </nav>
@@ -111,7 +111,7 @@
       </ul>
       <div class="tab-content pt-2" id="borderedTabContent">
         <div class="tab-pane fade show active" id="bordered-percentage" role="tabpanel" aria-labelledby="home-tab">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/admin/upload/discountPercentage" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -127,7 +127,7 @@
                                        </div>
                                        <!-- Select Button -->
                                        <button type="button" id="select-btn">Select Image</button>
-                                       <input type="file" id="file-input" accept="image/*" hidden />
+                                       <input type="file" name="image" id="file-input" accept="image/*" hidden />
                                        <!-- Preview -->
                                        <div id="preview">
                                            <img id="preview-img" alt="Preview" />
@@ -147,40 +147,59 @@
                                     <div class="col-12 mb-3">
                                         <label for="shop1"><b>Shop:</b></label>
                                         <select name="shop" class="form-select border-2 border-dark select2" id="shop1">
-                                            <option value="Rice Express">Rice Express</option>
-                                            <option value="Tube Cafe">Tube Cafe</option>
+                                            @foreach ($shops as $shop)
+                                                <option value="{{$shop['id']}}">{{$shop['name']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label><b>Item Name:</b></label>
-                                        <input type="text" class="form-control border-2 border-dark">
+                                        <input type="text" name="name" placeholder="Food Name" class="form-control border-2 border-dark" required>
                                     </div>
 
                                     <div class="col-6 mb-3">
-                                        <label><b>Original Price ($):</b></label>
-                                        <input type="number" placeholder="0.00" class="form-control border-2 border-dark">
+                                        <label><b>Original Price:</b></label>
+                                        <div class="input-group">
+                                            <input type="number" name="price" placeholder="E.g. 00.00" class="form-control border-2 border-dark" required>
+                                            <select name="currency" class=" border-2 border-dark">
+                                                <option value="dollar">USD ($)</option>
+                                                <option value="riel">KHR (៛)</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label><b>Discount (%):</b></label>
-                                        <input type="number" class="form-control border-2 border-dark">
+                                        <input type="number" name="discount" placeholder="E.g. 10" class="form-control border-2 border-dark" required>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label><b>Quantity:</b></label>
-                                        <input type="number" class="form-control border-2 border-dark">
+                                        <input type="number" name="qty" class="form-control border-2 border-dark" required>
+                                    </div>
+
+                                     <div class="col-6 mb-3">
+                                        <label><b>Title:</b></label>
+                                        <input type="text" name="title" placeholder="E.g. Deal of the day" class="form-control border-2 border-dark" >
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Description:</b></label>
+                                        <input type="text" name="description" placeholder="Description" class="form-control border-2 border-dark" >
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label for="from_date1"><b>Start Date:</b></label>
-                                        <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date1">
+                                        <input type="date" name="start" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date1" required>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label for="to_date1"><b>End Date:</b></label>
-                                        <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date1">
+                                        <input type="date" name="end" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date1" required>
                                     </div>
+
+
 
                                 </div>
                             </div>
@@ -194,7 +213,7 @@
         </div>
         <div class="tab-pane fade" id="bordered-free" role="tabpanel" aria-labelledby="profile-tab">
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/admin/upload/discountfree" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -210,7 +229,7 @@
 
                                         <!-- Select Button -->
                                         <button type="button" id="select-btn1">Select Image</button>
-                                        <input type="file" id="file-input1" accept="image/*" hidden />
+                                        <input type="file" name="image" id="file-input1" accept="image/*" hidden />
 
                                         <!-- Preview -->
                                         <div id="preview1">
@@ -229,24 +248,41 @@
                                     <div class="col-12 mb-3">
                                         <label ><b>Shop:</b></label>
                                         <select name="shop" class="form-select border-2 border-dark select2" >
-                                            <option value="Rice Express">Rice Express</option>
-                                            <option value="Tube Cafe">Tube Cafe</option>
+                                            @foreach ($shops as $shop)
+                                                <option value="{{$shop['id']}}">{{$shop['name']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label><b>Item Name:</b></label>
-                                        <input type="text" class="form-control border-2 border-dark">
+                                        <input type="text" name="name" placeholder="Food Name" class="form-control border-2 border-dark">
                                     </div>
 
                                     <div class="col-6 mb-3">
-                                        <label><b>Price ($):</b></label>
-                                        <input type="number" placeholder="0.00" class="form-control border-2 border-dark">
+                                        <label><b>Original Price:</b></label>
+                                        <div class="input-group">
+                                            <input type="number" name="price" placeholder="E.g. 00.00" class="form-control border-2 border-dark" required>
+                                            <select name="currency" class=" border-2 border-dark">
+                                                <option value="dollar">USD ($)</option>
+                                                <option value="riel">KHR (៛)</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <label><b>Quantity:</b></label>
-                                        <input type="number" class="form-control border-2 border-dark">
+                                        <input type="number" name="qty" class="form-control border-2 border-dark">
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <label><b>Title:</b></label>
+                                        <input type="text" name="title" placeholder="E.g. Deal of the day" class="form-control border-2 border-dark" >
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label><b>Description:</b></label>
+                                        <input type="text" name="description" placeholder="Description" class="form-control border-2 border-dark" >
                                     </div>
 
                                 </div>
@@ -272,7 +308,7 @@
 
                                        <!-- Select Button -->
                                        <button type="button" id="select-btn2">Select Image</button>
-                                       <input type="file" id="file-input2" accept="image/*" hidden />
+                                       <input type="file" name="image_free" id="file-input2" accept="image/*" hidden />
 
                                        <!-- Preview -->
                                        <div id="preview2">
@@ -290,21 +326,21 @@
                                     <div class="row">
                                         <div class="col-6 mb-3">
                                             <label><b>Free Item Name:</b></label>
-                                            <input type="text" class="form-control border-2 border-dark">
+                                            <input type="text" name="name_free" class="form-control border-2 border-dark">
                                         </div>
 
                                         <div class="col-6 mb-3">
                                             <label><b>Free Quantity:</b></label>
-                                            <input type="number" class="form-control border-2 border-dark">
+                                            <input type="number" name="qty_free" class="form-control border-2 border-dark">
                                         </div>
 
                                         <div class="col-6 mb-3">
                                             <label for="from_date2"><b>Start Date:</b></label>
-                                            <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date2">
+                                            <input type="date" name="start" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="from_date2">
                                         </div>
                                         <div class="col-6 mb-3">
                                             <label for="to_date2"><b>End Date:</b></label>
-                                            <input type="date" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date2">
+                                            <input type="date" name="end" class="form-control border-2 border-dark" value="{{date('Y-m-d')}}" id="to_date2">
                                         </div>
                                     </div>
                                 </div>

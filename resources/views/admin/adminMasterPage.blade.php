@@ -81,7 +81,7 @@
 
         <li class="nav-item">
           <a class="nav-link {{request()->is('*Post')?'':'collapsed'}}" data-bs-target="#posts-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Posts</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-postcard-heart"></i><span>Posts</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="posts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
@@ -90,7 +90,7 @@
               </a>
             </li>
             <li>
-              <a href="/admin/uploadPost">
+              <a href="/admin/upload/Post">
                 <i class="bi bi-circle"></i><span>Upload Post</span>
               </a>
             </li>
@@ -100,7 +100,7 @@
 
         <li class="nav-item">
           <a class="nav-link {{request()->is('*Shop')?'':'collapsed'}}" data-bs-target="#shops-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Shop</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-shop-window"></i><span>Shop</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="shops-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
@@ -126,7 +126,7 @@
 
         <li class="nav-item">
           <a class="nav-link {{request()->is('*Admin')?'':'collapsed'}}" data-bs-target="#admin-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Admin</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-people"></i><span>Admin</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="admin-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>

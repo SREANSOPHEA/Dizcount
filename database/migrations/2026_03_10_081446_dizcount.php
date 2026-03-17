@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('password');
             $table->string('phone', 20);
             $table->string('telegram', 100);
-            $table->enum('role', ['admin', 'seller', 'customer', 'guest']);
+            $table->enum('role', ['superAdmin','admin', 'seller', 'customer', 'guest']);
             $table->timestamps();
         });
 
@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('name', 100);
             $table->text('location');
             $table->text('logo_url')->nullable();
-            $table->string('phone', 20)->nullable();
-            $table->string('telegram', 100)->nullable();
+            $table->string('phone', 20);
+            $table->string('telegram', 100);
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -50,8 +50,10 @@ return new class extends Migration
             $table->string('purchase_item', 100);
             $table->integer('purchase_quantity');
             $table->decimal('price', 10, 2);
-            $table->string('title', 200);
+            $table->enum('currency',['dollar','riel']);
+            $table->string('title', 200)->nullable();
             $table->text('description')->nullable();
+            $table->text('purchase_img');
             $table->integer('viewer')->default(0);
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
@@ -72,6 +74,7 @@ return new class extends Migration
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->string('free_item', 255);
             $table->integer('free_quantity');
+            $table->text('free_img');
             $table->timestamps();
         });
 
@@ -82,7 +85,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');;
+        Schema::dropIfExists('users');
         Schema::dropIfExists('shops');
         Schema::dropIfExists('social_media');
         Schema::dropIfExists('posts');
