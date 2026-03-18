@@ -20,14 +20,6 @@
 </head>
 
 <body>
-
-    @if (session('error'))
-        <div class="alert alert-danger position-absolute alert-dismissible fade show" id="errorAlertMessage" style="top:-10px;right:10px;opacity:0" role="alert">
-        <h4 class="alert-heading">Account not found</h4>
-        <p>Invalid Username or Password</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
   <main>
       <div class="container">
           <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -82,17 +74,7 @@
     </div>
   </main>
 
-  <script>
-window.addEventListener('load', () => {
-  const tl = gsap.timeline();
 
-  tl.to('#errorAlertMessage', {
-    y: 20,
-    opacity: 1,
-    duration: 0.8
-  })
-});
-  </script>
 
   <!-- Vendor JS Files -->
   <script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
@@ -103,7 +85,6 @@ window.addEventListener('load', () => {
   <script src="{{asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
   <script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>

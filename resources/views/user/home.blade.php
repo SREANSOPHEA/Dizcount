@@ -55,23 +55,20 @@ a{
                                     <div class="detail-box">
                                         <h5>{{$data->purchase_item}}</h5>
                                         <span>{{ \Carbon\Carbon::parse($data->end_date)->format('d-M-Y') }}</span>
-                                </a>
+                                     </a>
 
                                 <div class="options">
                                     <div>
                                         @if($data->discount_type == 'percentage')
-                                            <h2 style="color:#f5c518"><b>$ {{$finalPrice}}</b></h2>
-                                            <p style="font-size:15px;color:#888"><s>was ${{$data->price}}</s></p>
+                                            <h2 style="color:#f5c518"><b>{{$data->currency == "dollar"?'$':'៛'}}{{ number_format($finalPrice, $data->currency=='dollar'?'2':'0') }}</b></h2>
                                         @else
-                                            <h2 style="color:#f5c518"><b>$ {{$data->price}}</b></h2>
-
+                                            <h2 style="color:#f5c518"><b>{{$data->currency == "dollar"?'$':'៛'}}{{ number_format($data->price, $data->currency=='dollar'?'2':'0') }}</b></h2>
                                         @endif
                                     </div>
                                     <div class="d-flex">
-                                        <a href="https://www.google.com/maps/dir/?api=1&destination={{$data->shop->location}}" class="card-food-btn m-1"><i class="bi bi-geo-alt-fill"></i></a>
+                                        <a href="https://www.google.com/maps/dir/?api=1&destination={{$data->shop->location}}" target="_blank" class="card-food-btn m-1"><i class="bi bi-geo-alt-fill"></i></a>
                                         <a href="tel:{{$data->shop->phone}}" class="card-food-btn m-1"><i class="bi bi-telephone-fill"></i></a>
                                         <a href="{{$data->shop->telegram}}" class="card-food-btn m-1"><i class="bi bi-chat-dots-fill"></i></a>
-
                                     </div>
                                 </div>
                             </div>

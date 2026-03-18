@@ -5,7 +5,9 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\posts;
 use App\Models\shops;
+use App\Models\social_media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class userController extends Controller
 {
@@ -16,11 +18,8 @@ class userController extends Controller
         $posts = posts::with(['shop','discount_percentage','discount_free'])
                 ->where('start_date', '<=', now())
                 ->where('end_date', '>=', now())
+                ->latest()
                 ->get();
-
-        // return $posts;
-
-        // return $posts;
         return view('user.home',['posts'=>$posts,'shops'=>$shops]);
     }
 
@@ -32,8 +31,30 @@ class userController extends Controller
         return view('user.contact');
     }
 
+    function sendEmail(Request $request){
+         $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required',
+        ]);
+
+        // Send email
+        Mail::raw(
+            "Name: {$request->name}\nEmail: {$request->email}\nMessage: {$request->message}",
+            function ($mail) use ($request) {
+                $mail->to('sreansophea2105@gmail.com')
+                     ->subject('New Contact Form Message');
+            }
+        );
+
+        return back()->with('success', 'Message sent!');
+    }
+
     function viewPost($id){
-        // return $id;
-        return view("user.viewPost");
+        $data = posts::with(['shop','discount_free','discount_percentage'])->find($id);
+        $socials = social_media::where('shop_id',$id)->get();
+        // return $socials;
+        // return $socials;
+        return view("user.viewPost",['data'=>$data,'socials'=>$socials]);
     }
 }

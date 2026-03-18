@@ -11,18 +11,19 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
+            <form action="/send-email" method="POST">
+              @csrf
               <div>
-                <input type="text" class="form-control" placeholder="Your Name" />
+                <input type="text" name="name" class="form-control" placeholder="Your Name" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Your Email" />
+                <input type="email" name="email" class="form-control" placeholder="Your Email" />
               </div>
               <div>
-                <textarea class="form-control"  cols="30" rows="30" placeholder="Your Message"></textarea>
+                <textarea class="form-control" name="message"  cols="30" rows="30" placeholder="Your Message"></textarea>
               </div>
               <div class="btn_box">
-                <button>Send Message</button>
+                <button type="submit">Send Message</button>
               </div>
             </form>
           </div>

@@ -21,9 +21,7 @@ class adminController extends Controller
     }
 
     function logout(){
-        // Auth::guard('web')->logout();
-        Auth::guard('api')->logout();
-        // Session::forget('userID');
+        Auth::guard('web')->logout();
         Session::flush();
         return redirect('/admin/login');
     }
@@ -32,16 +30,19 @@ class adminController extends Controller
         $username = $request->username;
         $password = $request->password;
 
+
+
         $user = users::where('username', $username)->first();
 
         // Check if user exists AND password matches
         if ($user && Hash::check($password, $user->password)) {
-            Auth::guard('api')->login($user);
-            // Auth::guard('web')->login($user);
-            $token = JWTAuth::fromUser($user);
+            if (!in_array($user->role, ['admin', 'superAdmin'])) {
+                return back()->with('error', 'You do not have admin privileges');
+            }
+            Auth::guard('web')->login($user);
             Session::put('userID', $user->id);
-            Session::put('jwt_token', $token);
             Session::put('user_role', $user->role);
+            Session::put('username', $user->username);
 
             return redirect('/admin')->with('success', 'Welcome back!');
         }
@@ -52,7 +53,6 @@ class adminController extends Controller
     }
 
     function dashboard(){
-        return Auth::guard('api')->user();
         $now = Carbon::now();
         $totalShop = shops::all()->count();
         $totalAdmin = users::where('role','admin')->count();
@@ -70,7 +70,6 @@ class adminController extends Controller
 
     function viewAdmin(){
         $items = users::all();
-        // return $items;
         return view("admin.viewAdmin",['items'=>$items]);
     }
 

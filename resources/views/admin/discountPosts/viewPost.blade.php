@@ -116,7 +116,7 @@
                     </td>
 
                     <td>
-                        <div class="dropdown">
+                        <div class="filter">
                             <a class="icon text-dark" href="#" data-bs-toggle="dropdown">
                                 <i class="bi bi-three-dots fs-5"></i>
                             </a>

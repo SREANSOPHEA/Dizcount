@@ -22,7 +22,7 @@
                     <th>N<sup>o</sup></th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Password</th>
+                    {{-- <th>Password</th> --}}
                     <th>Phone</th>
                     <th>Telegram</th>
                     <th>Action</th>
@@ -37,7 +37,7 @@
                         <td>{{$i++}}</td>
                         <td>{{$data['username']}}</td>
                         <td>{{$data['email']}}</td>
-                        <td>{{$data['password']}}</td>
+                        {{-- <td>{{$data['password']}}</td> --}}
                         <td><a href="tel:{{$data['phone']}}">{{$data['phone']}}</a></td>
                         <td><a href="{{$data['telegram']}}" target="_blank">{{$data['telegram']}}</a></td>
                         <td>
@@ -51,7 +51,7 @@
                         </td>
                     </tr>
                 @endforeach
-            
+
             </tbody>
         </table>
     </div>

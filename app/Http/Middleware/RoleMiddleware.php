@@ -14,7 +14,7 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next,$role): Response
+    public function handle(Request $request, Closure $next,string $role): Response
     {
         if (!Session::has('userID')) {
             return redirect('/admin/login')->with('error', 'Please login first');
@@ -26,7 +26,8 @@ class RoleMiddleware
         $allowedRoles = explode(',', $role);
 
         if (!in_array($userRole, $allowedRoles)) {
-            return redirect('/admin')->with('error', 'You do not have permission to access this page');
+            return redirect('accessDeny');
+            // return redirect('/admin')->with('error', 'You do not have permission to access this page');
         }
         return $next($request);
     }
