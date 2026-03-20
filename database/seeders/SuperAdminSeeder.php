@@ -15,12 +15,14 @@ class SuperAdminSeeder extends Seeder
     public function run(): void
     {
         users::updateOrCreate([
-            'username' => "SuperAdmin",
-            'email'    => "admin@gamil.com",
-            'password'    => Hash::make("admin@123"),
-            'phone'    => "0",
-            'telegram'    => "https://t.me/sothea",
-            'role'    => "superAdmin",
+            ['username' => 'SuperAdmin'], // condition (unique key)
+            [
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('admin@123'),
+                'phone' => '0',
+                'telegram' => 'https://t.me/sothea',
+                'role' => 'superAdmin',
+            ]
         ]);
     }
 }
