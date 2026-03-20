@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/Edit/discountPost/{id}', [postController::class, 'editDiscountPost']);
     Route::post('/admin/edit/discountPost/percentage/{id}', [postController::class, 'editDiscountPercentagePost']);
     Route::post('/admin/edit/discountPost/free/{id}', [postController::class, 'editDiscountFreePost']);
+    Route::post('/admin/delete/discountPost', [postController::class, 'deleteDiscountPost']);
 
     // ── Shop routes ───────────────────────────────────────
     Route::get('/admin/viewShop', [shopController::class, 'viewShop']);
