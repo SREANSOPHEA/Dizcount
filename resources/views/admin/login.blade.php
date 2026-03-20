@@ -29,7 +29,7 @@
 
               <div class="d-flex justify-content-center py-4">
                 <a href="/admin/login" class="logo d-flex align-items-center w-auto">
-                  <img src="{{asset('assets/img/dizcount.png')}}" alt="logo">
+                  <img src="{{asset('assets1/images/dizcount.png')}}" alt="logo">
                   <span class="d-none d-lg-block">Dizcount</span>
                 </a>
               </div>

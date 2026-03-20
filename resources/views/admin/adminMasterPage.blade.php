@@ -26,7 +26,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a href="/admin" class="logo d-flex align-items-center">
-          <img src="{{asset('assets/img/dizcount.png')}}" alt="Logo" />
+          <img src="{{asset('assets1/images/dizcount.png')}}" alt="Logo" />
           <span class="d-none d-lg-block">Dizcount</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -38,7 +38,7 @@
 
           <li class="nav-item dropdown pe-3">
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="{{asset('assets/img/dizcount.png')}}" alt="Profile" class="rounded-circle"/>
+              <img src="{{asset('assets1/images/dizcount.png')}}" alt="Profile" class="rounded-circle"/>
               <span class="d-none d-md-block dropdown-toggle ps-2">{{session('username')}}</span>
             </a>
 

@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="{{asset('assets/img/dizcount.png')}}" alt="">
+            <img src="{{asset('assets1/images/dizcount.png')}}" alt="">
           </div>
         </div>
         <div class="col-md-6">
