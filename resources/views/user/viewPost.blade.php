@@ -67,7 +67,7 @@ img{
                             </span>
                         </div> --}}
                         <center><img src="{{asset('assets/img/'.$data->purchase_img)}}" class="rounded" style="height: 270px" alt="Purchase Image"></center>
-                       
+
                     </div>
                     @if ($data->discount_type == "free_item")
                         <div style="width: max-content; padding:3px 7px;margin:20px auto;" class="bg-success rounded"><h1><b>Free</b></h1></div>
@@ -126,19 +126,12 @@ img{
         @if ($socials)
             <div class="col-12 col-md-6 text-end">
                 <div class="d-flex justify-content-end">
-                    <div class="socialIconWraper facebook">
-                        <a href=""><i class="fa fa-facebook"></i></a>
-                    </div>
-                    <div class="socialIconWraper tiktok">
-                        <a href=""><i class="bi bi-tiktok"></i></a>
-                    </div>
-                    <div class="socialIconWraper instagram">
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                    </div>
+                    @foreach ($socials as $media)
+                        <div class="socialIconWraper {{$media->platform}}">
+                            <a href="{{$media->url}}"><i class="bi bi-tiktok"></i></a>
+                        </div>
+                    @endforeach
                 </div>
-                @foreach ($socials as $media)
-                    <a href="{{$media->url}}">{{$media->platform}}</a>
-                @endforeach
             </div>
         @endif
     </div>

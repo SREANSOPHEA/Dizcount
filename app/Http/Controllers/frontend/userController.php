@@ -39,15 +39,20 @@ class userController extends Controller
         ]);
 
         // Send email
-        Mail::raw(
-            "Name: {$request->name}\nEmail: {$request->email}\nMessage: {$request->message}",
-            function ($mail) use ($request) {
-                $mail->to('sreansophea2105@gmail.com')
-                     ->subject('New Contact Form Message');
-            }
-        );
+        try {
+            Mail::raw(
+                "Name: {$request->name}\nEmail: {$request->email}\nMessage: {$request->message}",
+                function ($mail) use ($request) {
+                    $mail->to('sreansophea2105@gmail.com')
+                        ->from($request->email, $request->name)
+                        ->subject('New Contact Form Message');
+                }
+            );
 
-        return back()->with('success', 'Message sent!');
+            return back()->with('success', 'Message sent successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to send message. Please try again.');
+        }
     }
 
     function viewPost($id){
