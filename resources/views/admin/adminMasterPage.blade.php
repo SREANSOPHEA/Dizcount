@@ -6,7 +6,7 @@
 
     <title>Dizcount-Admin</title>
 
-    <link href="{{asset('assets/img/dizcount.png')}}" rel="icon">
+    <link href="{{asset('assets1/images/dizcount.png')}}" rel="icon">
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}">
 
