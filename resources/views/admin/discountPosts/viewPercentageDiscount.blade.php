@@ -308,20 +308,23 @@
           <strong>{{\Carbon\Carbon::parse($data->start_date)->format('d-M-Y')}}</strong> &ndash; <strong>{{\Carbon\Carbon::parse($data->end_date)->format('d-M-Y')}}</strong>
         </div>
 
-
-        <div class="status-pill">
-          {{-- <i class="bi bi-lightning-fill me-1"></i> --}}
-             @php
+            @php
               use Carbon\Carbon;
                 $now = Carbon::now();
                 if ($now->lt($data->start_date)) {
-                     $status = 'inactive';
+                  $bg = 'bg-warning';
+                  $status = 'inactive';
                 } elseif ($now->between($data->start_date, $data->end_date)) {
-                      $status = 'active';
+                  $bg = 'bg-success';
+                  $status = 'active';
                 } elseif ($data->end_date && $now->gt($data->end_date)) {
-                      $status = 'expired';
+                  $status = 'expired';
+                  $bg = 'bg-danger';
                 }
             @endphp
+        <div class="status-pill {{$bg}}">
+          {{-- <i class="bi bi-lightning-fill me-1"></i> --}}
+
             {{$status}}
         </div>
       </div>

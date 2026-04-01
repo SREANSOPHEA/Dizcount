@@ -132,6 +132,10 @@
       background: var(--bg-card2);
     }
     .map-footer-text {
+      min-width: 70px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       font-size: 0.78rem;
       color: var(--text-muted);
       flex: 1;
@@ -246,7 +250,7 @@
           <i class="bi bi-geo-alt-fill" style="color: var(--accent); font-size: 1rem; flex-shrink:0;"></i>
           <span class="map-footer-text">{{ $data->location }}</span>
           <a href="https://www.google.com/maps/dir/?api=1&destination={{ $data->location }}"
-             target="_blank" class="btn-directions">
+            target="_blank" class="btn-directions">
             Directions
           </a>
         </div>

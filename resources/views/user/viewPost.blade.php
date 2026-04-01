@@ -61,17 +61,18 @@ img{
             <div class="row discount-info mt-3">
                 <div class="col-12 col-lg-5">
                     <div class="position-relative">
-                        <div class="position-absolute">
+                        {{-- <div class="position-absolute">
                             <span class="badge rounded-pill bg-danger p-2">
                                 (x {{$data->purchase_quantity}})
                             </span>
-                        </div>
+                        </div> --}}
                         <center><img src="{{asset('assets/img/'.$data->purchase_img)}}" class="rounded" style="height: 270px" alt="Purchase Image"></center>
+                       
                     </div>
                     @if ($data->discount_type == "free_item")
                         <div style="width: max-content; padding:3px 7px;margin:20px auto;" class="bg-success rounded"><h1><b>Free</b></h1></div>
                         <div class="position-relative">
-                            <center><img src="{{asset('assets/img/'.$data->discount_free->free_img)}}" class="rounded" style="height: 270px" alt="Purchase Image"></center>
+                            <center><img src="{{asset('assets/img/'.$data->discount_free->free_img)}}" class="rounded" style="height: 200px" alt="Purchase Image"></center>
                         </div>
                     @endif
                 </div>

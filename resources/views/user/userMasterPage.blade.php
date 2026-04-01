@@ -7,7 +7,7 @@
   <link rel="shortcut icon" href="images/favicon.png" type="">
 
   <title> Dizcount </title>
-  <link rel="icon" href="{{asset('assets/img/dizcount.png')}}">
+  <link rel="icon" href="{{asset('assets1/images/dizcount.png')}}">
   <link rel="stylesheet" href="{{asset('assets1/css/bootstrap.css')}}">
   <link rel="stylesheet" href="{{asset('assets1/css/font-awesome.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets1/css/style.css')}}">
@@ -17,7 +17,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
 </head>
 <body>
-
   @if (app()->getLocale()=='en')
     <style>
       body{

@@ -17,6 +17,21 @@ a{
 .card-food-btn:hover{
     transform: scale(1.1);
 }
+.rice{
+    position: relative;
+    animation: rice infinite 2s;
+}
+@keyframes rice{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(50px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
 </style>
 
 <section class="food_section layout_padding-bottom">
@@ -25,11 +40,20 @@ a{
             <h2>@lang('message.food')</h2>
         </div>
 
+        @if (count($posts) ==0)
+            <div class="w-100 card mt-4 bg-dark rounded text-light pb-4">
+                <center>
+                    <img class="img-fluid rice" src="{{asset('assets1/images/rice.png')}}" alt="food">
+                </center>
+                <h1 class="text-center"><b>No discounts here… yet</b></h1>
+                <h4 class="text-center mb-4">Vendors haven't posted any food deals right now. Be the first to know when a great offer drops!</h4>
+            </div>
+        @else
         <div class="filters-content">
             <div class="row grid">
 
-                @foreach ($posts as $data)
 
+                @foreach ($posts as $data)
                     <div class="col-sm-6 col-lg-4 all {{$data->shop_id}}">
                         <div class="box">
                            <div>
@@ -75,10 +99,10 @@ a{
                         </div>
                     </div>
                 </div>
-
                 @endforeach
             </div>
         </div>
+        @endif
     </div>
 </section>
 

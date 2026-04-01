@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\admin\adminController;
-use App\Http\Controllers\admin\categoryController;
-use App\Http\Controllers\admin\postController;
-use App\Http\Controllers\admin\shopController;
-use App\Http\Controllers\user\userController;
+use App\Http\Controllers\backend\adminController;
+use App\Http\Controllers\backend\postController;
+use App\Http\Controllers\backend\shopController;
+use App\Http\Controllers\frontend\userController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;

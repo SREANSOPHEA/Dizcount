@@ -356,19 +356,21 @@
           <i class="bi bi-calendar3 me-2"></i>
           <strong>{{\Carbon\Carbon::parse($data->start_date)->format('d-M-Y')}}</strong> &ndash; <strong>{{\Carbon\Carbon::parse($data->end_date)->format('d-M-Y')}}</strong>
         </div>
-        <div class="status-pill">
-          {{-- <i class="bi bi-lightning-fill me-1"></i> --}}
-            @php
-              use Carbon\Carbon;
-                $now = Carbon::now();
-                if ($now->lt($data->start_date)) {
-                     $status = 'pendung';
-                } elseif ($now->between($data->start_date, $data->end_date)) {
-                      $status = 'active';
-                } elseif ($data->end_date && $now->gt($data->end_date)) {
-                      $status = 'expired';
-                }
-            @endphp
+         @php
+          use Carbon\Carbon;
+            $now = Carbon::now();
+            if ($now->lt($data->start_date)) {
+              $bg = 'bg-warning';
+              $status = 'inactive';
+            } elseif ($now->between($data->start_date, $data->end_date)) {
+              $bg = 'bg-success';
+              $status = 'active';
+            } elseif ($data->end_date && $now->gt($data->end_date)) {
+              $status = 'expired';
+              $bg = 'bg-danger';
+            }
+        @endphp
+        <div class="status-pill {{$bg}}">
             {{$status}}
         </div>
       </div>

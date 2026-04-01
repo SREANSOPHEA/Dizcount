@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\posts;
@@ -29,9 +29,6 @@ class adminController extends Controller
     function loginSubmit(Request $request){
         $username = $request->username;
         $password = $request->password;
-
-
-
         $user = users::where('username', $username)->first();
 
         // Check if user exists AND password matches
@@ -70,12 +67,11 @@ class adminController extends Controller
 
     function viewAdmin(){
         $items = users::all();
-        return view("admin.viewAdmin",['items'=>$items]);
+        return view("admin.admins.viewAdmin",['items'=>$items]);
     }
 
     function addAdmin(){
-
-        return view("admin.addAdmin");
+        return view("admin.admins.addAdmin");
     }
 
     function addAdminSubmit(Request $request){
@@ -100,7 +96,7 @@ class adminController extends Controller
 
     function editAdmin($id){
         $data = users::find($id);
-        return view('admin.editAdmin',['data'=>$data]);
+        return view('admin.admins.editAdmin',['data'=>$data]);
     }
 
     function editAdminSubmit(Request $request,$id){

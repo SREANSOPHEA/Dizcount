@@ -104,18 +104,18 @@
                         <center>
                             <div class="box">
                                 <input type="checkbox" name="isDelete" id="isDeleteImage" hidden name="isDelete">
-                               <div id="drop-zone" style="display: none">
+                               <div id="drop-zone" style="display: {{$data['logo_url'] == 'img-icon.png'?'block':'none'}}">
                                    <div class="icon"><i class="bi bi-image"></i></div>
                                    <div>Drag & drop an image here</div>
                                </div>
                                <!-- Select Button -->
-                               <button type="button" style="display: none" id="select-btn">Select Image</button>
+                               <button type="button" style="display: {{$data['logo_url'] == 'img-icon.png'?'block':'none'}};margin:10px auto;" id="select-btn">Select Image</button>
                                <input type="file" name="image" id="file-input" accept="image/*" hidden />
                                <!-- Preview -->
-                               <div id="preview" style="display: block">
+                               <div id="preview" style="display: {{$data['logo_url'] == 'img-icon.png'?'none':'block'}}">
                                     <input type="hidden" value="{{$data['logo_url']}}" name="old_image">
                                    <img id="preview-img" src="{{asset('assets/img/'.$data['logo_url'])}}"  alt="Preview" />
-                                   <div id="file-name">{{$data['logo_url']}}</div>
+                                   <div id="file-name">{{$data['logo_url'] == 'img-icon.png'?'':$data['logo_url']}}</div>
                                    <div class="actions">
                                    <button type="button" id="btn-change"><i class="bi bi-arrow-repeat"></i> Change</button>
                                    <button type="button" id="btn-remove"><i class="bi bi-trash"></i> Remove</button>
@@ -130,14 +130,6 @@
                                 <label ><b>Shop Name:</b></label>
                                 <input type="text" name="name" value="{{$data['name']}}" placeholder="Shop Name" class="form-control border-2 border-dark" autocomplete="off" required>
                             </div>
-                            {{-- <div class="col-6 mb-3">
-                                <label><b>Shop Cateogry:</b></label>
-                                <select name="" id="" class="form-control border-2 border-dark">
-                                    <option value="">Fast food</option>
-                                    <option value="">Drink</option>
-                                    <option value="">Snack</option>
-                                </select>
-                            </div> --}}
                             <div class="col-6 mb-3">
                                 <label><b>Location (GPS Coordinates):</b></label>
                                 <input type="text" name="location" value="{{$data['location']}}" placeholder="E.g. 11.56115, 104.92244" class="form-control border-2 border-dark" autocomplete="off" required>
@@ -154,7 +146,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary w-100">Register Shop</button>
+                        <button type="submit" class="btn btn-primary w-100">Edit Shop</button>
                     </div>
                 </div>
             </div>

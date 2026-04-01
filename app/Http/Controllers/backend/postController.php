@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\post_detail_frees;
@@ -38,7 +38,12 @@ class postController extends Controller
     function uploadPostDiscount(Request $request){
 
         $file = $request->file('image');
-        $image = $this->uploadImage($file);
+        if(empty($file)){
+           $image = 'img-icon.png';
+        }else{
+            $image = $this->uploadImage($file);
+        }
+
 
         posts::create([
             'created_by'=>Session('userID'),
@@ -73,10 +78,19 @@ class postController extends Controller
 
     function uploadPostFree(Request $request){
         $file = $request->file('image');
-        $image = $this->uploadImage($file);
+        if(empty($file)){
+           $image = 'img-icon.png';
+        }else{
+            $image = $this->uploadImage($file);
+        }
 
         $file_free = $request->file('image_free');
-        $image_free = $this->uploadImage($file_free);
+
+        if(empty($file_free)){
+           $image_free = 'img-icon.png';
+        }else{
+            $image_free = $this->uploadImage($file_free);
+        }
 
         posts::create([
             'created_by'=>Session('userID'),

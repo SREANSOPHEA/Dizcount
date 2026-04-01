@@ -27,7 +27,7 @@
 
             <div class="col-lg-6 col-12 mb-3">
                 <label>Password</label>
-                <input type="password" placeholder="Password" name="password" value="{{$data['password']}}" class="form-control border-2 border-dark" autocomplete="off">
+                <input type="text" placeholder="Password" name="password" value="{{$data['password']}}" class="form-control border-2 border-dark" autocomplete="off">
             </div>
 
             <div class="col-lg-6 col-12 mb-3">

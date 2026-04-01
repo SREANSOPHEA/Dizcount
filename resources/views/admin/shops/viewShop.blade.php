@@ -1,5 +1,10 @@
 @extends('admin.adminMasterPage')
 @section('content')
+<style>
+    a{
+        color: black;
+    }
+</style>
 <div class="pagetitle">
     <h1>View All Shops</h1>
     <nav>

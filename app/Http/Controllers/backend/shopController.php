@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\shops;
@@ -77,8 +77,8 @@ class shopController extends Controller
         return redirect('admin/viewShop');
     }
 
-    function deleteShop(Request $id){
-        shops::find($id)->delete();
+    function deleteShop(Request $request){
+        shops::find($request->id)->delete();
         return redirect('admin/viewShop');
     }
 
